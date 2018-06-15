@@ -5,11 +5,20 @@ const allProjects = [];
 const projectReducer = (state = allProjects, action) => {
   switch (action.type) {
     case "ADD_PROJECT":
-      return [...state, action.project];
+      return [...state, action.project ];
     case "ADD_LIST":
       const { projectId } = action.list;
-      const activeProjectData = activeProject(projectId, state);
-      activeProjectData["0"].data.push(action.list);
+      return state.map((project) => {
+        if(project.id !== projectId){
+          return project
+        }
+        return Object.assign({}, project, {
+          data : {
+            ...project.data,
+            [action.list.id] : action.list
+          }
+      })
+      })
     default:
       return state;
   }

@@ -7,7 +7,7 @@ export const addProject = (projectTitle = defaultProjectTitle) => ({
     project: {
         id: uuid.v4(),
         title: projectTitle,
-        data: []
+        data: {}
     }
 });
 
